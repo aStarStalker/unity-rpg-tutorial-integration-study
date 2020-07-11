@@ -27,4 +27,30 @@ public class scrInventory : MonoBehaviour
             itemSlots[i].Item = null;
         }
     }
+
+    public bool AddItem(scrItem item)
+    {
+        if (IsFull())
+            return false;
+
+        items.Add(item);
+        RefreshUI();
+        return true;
+    }
+
+    public bool RemoveItem(scrItem item)
+    {
+        if (items.Remove(item))
+        {
+            RefreshUI();
+            return true;
+        }
+        return false;
+        
+    }
+
+    public bool IsFull()
+    {
+        return items.Count >= itemSlots.Length;
+    }
 }
